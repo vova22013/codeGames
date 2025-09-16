@@ -1,3 +1,5 @@
+// https://www.codingame.com/ide/puzzle/ascii-art
+
 #include <iostream>
 #include <string>
 #include <vector>
