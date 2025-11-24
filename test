@@ -157,3 +157,59 @@ void PrintBits(long long value, size_t bytes) {
     std::cout << str_bset << "\n";
 }
 
+TASK6 QUADRATIC
+#include <stdexcept>
+#include <iomanip>
+#include <iostream>
+#include <string>
+#include <cmath>
+
+void SolveQuadratic(int a, int b, int c) {
+    double x_1, x_2;
+    std::setprecision(6);
+    
+    if (a == 0) {
+        if (b == 0) {
+            if (c == 0){
+                std::cout << "infinite solutions";
+            }
+            else {
+                std::cout << "no solutions";
+            } 
+        }
+        else {            
+            x_1 = static_cast<double>(-c) / static_cast<double>(b);
+            
+            auto answer = std::to_string(x_1);
+            std::cout << answer;
+        }
+        
+        return;
+    }
+    
+    double D_2 = b * b - 4 * a * c;
+    
+    if (D_2 < 0) {
+        std::cout << "no solutions";
+        return;
+    } 
+    else if (D_2 == 0) {
+        x_1 = static_cast<double>(-b) / static_cast<double>(2 * a);
+            
+        auto answer = std::to_string(x_1);
+        std::cout << answer;
+    }
+    else {
+        double neg_b = static_cast<double>(-b);
+        double two_a = static_cast<double>(2 * a);
+        double D     = static_cast<double>(std::sqrt(D_2));
+        
+        x_1 = (neg_b + D) / two_a;
+        x_2 = (neg_b - D) / two_a;
+        
+        if (x_1 > x_2) std::swap(x_1, x_2);
+        
+        auto answer = std::to_string(x_1) + " " + std::to_string(x_2);
+        std::cout << answer;
+    }
+}
