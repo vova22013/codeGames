@@ -127,10 +127,10 @@ constexpr long double operator""_cm_to_cm(long double cm) {
 
 
 TASK5 BITSET
-#include <iosteam>
-#include <alghoritm>
+#include <iostream>
+#include <algorithm>
 
-void prntBits(long long value, size_t bytes) {
+void PrintBits(long long value, size_t bytes) {
     std::string str_bset = "";
     
     auto bits = bytes * 8;
@@ -151,7 +151,9 @@ void prntBits(long long value, size_t bytes) {
     }
 
     str_bset += "b0";
+    
     std::reverse(str_bset.begin(), str_bset.end());
+    
     std::cout << str_bset << "\n";
 }
 
