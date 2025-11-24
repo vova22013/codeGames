@@ -1,0 +1,56 @@
+enum class CheckFlags : uint8_t {
+    NONE = 0,
+    TIME = (1 << 0),
+    DATE = (1 << 1),
+    USER = (1 << 2),
+    CERT = (1 << 3),
+    KEYS = (1 << 4),
+    DEST = (1 << 5),
+    ALL = TIME | DATE | USER | CERT | KEYS | DEST
+};
+
+void PrintCheckFlags(CheckFlags flags) {
+    if (flags > CheckFlags::ALL) {
+        std::cout << "";
+        return;
+    }
+
+    bool the_first = false;
+    std::string str_flags = "[";    
+
+    for (size_t i = 0; i < sizeof(int8_t); ++i) {
+        auto b_i = (static_cast<int8_t>(flags) >> i) & 1u;        
+
+        if (static_cast<bool>(b_i)) {
+            int8_t bmask = 1 << i;
+            switch(bmask) {
+                case static_cast<int8_t>(CheckFlags::TIME): 
+                    str_flags += "TIME";
+                    break;
+                case static_cast<int8_t>(CheckFlags::DATE): 
+                    the_first ? str_flags += ",DATE" : str_flags += "DATE";
+                    break;
+                case static_cast<int8_t>(CheckFlags::USER): 
+                    the_first ? str_flags += ",USER" : str_flags += "USER";
+                    break;
+                case static_cast<int8_t>(CheckFlags::CERT): 
+                    the_first ? str_flags += ",CERT" : str_flags += "CERT";
+                    break;
+                case static_cast<int8_t>(CheckFlags::KEYS): 
+                    the_first ? str_flags += ",KEYS" : str_flags += "KEYS";
+                    break;
+                case static_cast<int8_t>(CheckFlags::DEST): 
+                    the_first ? str_flags += ",DEST" : str_flags += "DEST";
+                    break;
+            
+                default:
+                    break;
+            }
+
+            the_first = true;
+        }
+    }
+
+    str_flags += "]";
+    std::cout << str_flags;
+}
